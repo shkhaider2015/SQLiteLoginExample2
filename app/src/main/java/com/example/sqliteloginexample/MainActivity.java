@@ -1,8 +1,6 @@
 package com.example.sqliteloginexample;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
@@ -16,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init()
     {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.login_fragment);
+
         
     }
 }
