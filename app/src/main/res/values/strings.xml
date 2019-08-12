@@ -10,5 +10,12 @@
     <string name="name">Full Name</string>
     <string name="confirm_password">Confirm Password</string>
 
+    <string name="electrician">Electrician</string>
+    <string name="carpenter">Carpenter</string>
+    <string name="plumber">Plumber</string>
+    <string name="mechanic">Mechanic</string>
+    <string name="gardner">Gardner</string>
+    <string name="painter">Painter</string>
+
 
 </resources>

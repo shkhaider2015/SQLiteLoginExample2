@@ -1,35 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorBackground">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:cardBackgroundColor="@color/pink"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="@string/carpenter"
+                android:textColor="#ffffff"
+                android:textSize="40sp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="top|end"
+                android:alpha="0.6"
+                android:contentDescription="@string/login"
+                android:padding="10dp"
+                android:src="@drawable/categories_carpenter" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            app:cardBackgroundColor="@color/yellow"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="@string/electrician"
+                android:textColor="#ffffff"
+                android:textSize="40sp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="top|end"
+                android:alpha="0.6"
+                android:contentDescription="@string/login"
+                android:padding="10dp"
+                android:src="@drawable/categories_electrician" />
+
+
+        </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/blue"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView2">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
-            android:text="@string/name"
-            android:textSize="40sp"
-            android:padding="10dp"/>
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="@string/plumber"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
 
         <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="top|end"
+            android:alpha="0.6"
+            android:contentDescription="@string/login"
+            android:padding="10dp"
+            android:src="@drawable/categories_plumber" />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/orange"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView3">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/login"
+            android:layout_gravity="top|start"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="@string/mechanic"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="top|end"
-            android:src="@mipmap/ic_launcher"
-            android:padding="10dp"/>
+            android:alpha="0.6"
+            android:contentDescription="@string/login"
+            android:padding="10dp"
+            android:src="@drawable/categories_mechanic" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="@string/painter"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="top|end"
+            android:alpha="0.6"
+            android:contentDescription="@string/login"
+            android:padding="10dp"
+            android:src="@drawable/categories_painter" />
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="@color/purple"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="@string/gardner"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="top|end"
+            android:alpha="0.6"
+            android:contentDescription="@string/login"
+            android:padding="10dp"
+            android:src="@drawable/categories_gardner" />
 
 
     </androidx.cardview.widget.CardView>
