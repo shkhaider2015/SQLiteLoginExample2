@@ -6,6 +6,10 @@
 
     <color name="colorBackground">#93c26b</color>
 
+    <color name="startColor">#93c26b</color>
+    <color name="centerColor"></color>
+    <color name="EndColor">#9993c26b</color>
+
     <color name="black">#000000</color>
     <color name="gray">#828282</color>
     <color name="white">#ffffff</color>
