@@ -34,7 +34,10 @@
             android:layout_marginTop="20dp"
             android:autofillHints="@string/name"
             android:hint="@string/name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:drawableLeft="@drawable/others_user"
+            android:drawableStart="@drawable/others_user"
+            android:drawablePadding="15dp"/>
 
         <EditText
             android:id="@+id/signup_email"
@@ -43,7 +46,10 @@
             android:layout_marginTop="20dp"
             android:autofillHints="@string/email"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:drawableLeft="@drawable/others_email"
+            android:drawableStart="@drawable/others_email"
+            android:drawablePadding="15dp"/>
 
         <EditText
             android:id="@+id/signup_password"
@@ -52,7 +58,10 @@
             android:layout_marginTop="20dp"
             android:autofillHints="@string/password"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/others_password"
+            android:drawableStart="@drawable/others_password"
+            android:drawablePadding="15dp"/>
 
         <EditText
             android:id="@+id/signup_confirm_password"
@@ -61,7 +70,22 @@
             android:layout_marginTop="20dp"
             android:autofillHints="@string/confirm_password"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/others_password"
+            android:drawableStart="@drawable/others_password"
+            android:drawablePadding="15dp"/>
+
+        <EditText
+            android:id="@+id/signup_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:autofillHints="@string/phone"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:drawableLeft="@drawable/others_phone"
+            android:drawableStart="@drawable/others_phone"
+            android:drawablePadding="15dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signup_signup"

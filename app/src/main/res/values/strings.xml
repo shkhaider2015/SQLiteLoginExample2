@@ -11,6 +11,7 @@
     <string name="name">Full Name</string>
     <string name="profile_pic">Profile Picture</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="phone">Cell Number</string>
 
     <string name="electrician">Electrician</string>
     <string name="carpenter">Carpenter</string>
