@@ -71,6 +71,11 @@ public class SignupFragment extends Fragment {
             mConfirmPassword.requestFocus();
             return;
         }
+        if(cellNumber.isEmpty())
+        {
+            mCellNumber.requestFocus();
+            return;
+        }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             mEmail.requestFocus();
@@ -86,7 +91,19 @@ public class SignupFragment extends Fragment {
             mConfirmPassword.requestFocus();
             return;
         }
+        if(!Patterns.PHONE.matcher(cellNumber).matches())
+        {
+            mCellNumber.requestFocus();
+            return;
+        }
+
+        loadToDatabase(name, email, password, cellNumber);
 
 
+    }
+
+    private void loadToDatabase(String name, String email, String password, String cellNumber)
+    {
+        
     }
 }
