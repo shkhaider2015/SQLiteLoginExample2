@@ -3,6 +3,7 @@ package com.example.sqliteloginexample;
 public class UserDataModel {
 
     private String
+            id,
             name,
             email,
             password,
@@ -27,6 +28,14 @@ public class UserDataModel {
 
     public void setCellNumber(String cellNumber) {
         this.cellNumber = cellNumber;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

@@ -2,6 +2,7 @@ package com.example.sqliteloginexample;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -80,5 +81,54 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         //insert row
         long todo_id = db.insert(TABLE_USERS, null, contentValues);
+    }
+
+    public UserDataModel authenticate(UserDataModel userDataModel)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,
+                new String[]{
+                        KEY_ID, KEY_USER_NAME, KEY_EMAIL, KEY_PASSWORD, KEY_PHONE, KEY_PROFILE_PIC
+                },
+                KEY_EMAIL + "=?",
+                new String[]{
+                        userDataModel.getEmail()
+                }, null, null, null);
+
+        if(cursor != null && cursor.moveToFirst() && cursor.getCount() > 0)
+        {
+            UserDataModel newUser = new UserDataModel();
+
+            newUser.setId(cursor.getString(0));
+            newUser.setName(cursor.getString(1));
+            newUser.setEmail(cursor.getString(2));
+            newUser.setPassword(cursor.getString(3));
+            newUser.setCellNumber(cursor.getString(4));
+            newUser.setProfilePicture(cursor.getBlob(5));
+
+            if(userDataModel.getPassword().equals(newUser.getPassword()))
+            {
+                return newUser;
+            }
+
+        }
+        return null;
+    }
+
+    public boolean isEmailExists(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,// Selecting Table
+                new String[]{KEY_ID, KEY_USER_NAME, KEY_EMAIL, KEY_PASSWORD, KEY_PHONE, KEY_PROFILE_PIC},//Selecting columns want to query
+                KEY_EMAIL + "=?",
+                new String[]{email},//Where clause
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()&& cursor.getCount()>0) {
+            //if cursor has value then in user database there is user associated with this given email so return true
+            return true;
+        }
+
+        //if email does not exist return false
+        return false;
     }
 }
