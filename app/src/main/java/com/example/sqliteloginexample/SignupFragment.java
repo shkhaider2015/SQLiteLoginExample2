@@ -30,8 +30,8 @@ import java.io.IOException;
 
 public class SignupFragment extends Fragment implements View.OnClickListener {
 
-    private static final int REQUEST_CAMERA = 121;
-    private static final int SELECT_FILE = 131;
+    private static final int REQUEST_CAMERA = 0;
+    private static final int SELECT_FILE = 1;
     private static final String TAG = "SignupFragment";
 
     private String userChoosenTask = "Nothing";
@@ -260,7 +260,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        ivImage.setImageBitmap(bm);
+        mProfilePicture.setImageBitmap(bm);
     }
     private void onCaptureImageResult(Intent data)
     {
@@ -287,6 +287,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        ivImage.setImageBitmap(thumbnail);
+
+        mProfilePicture.setImageBitmap(thumbnail);
     }
 }
