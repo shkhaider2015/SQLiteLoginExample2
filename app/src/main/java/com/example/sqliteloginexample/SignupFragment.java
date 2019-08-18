@@ -2,7 +2,9 @@ package com.example.sqliteloginexample;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class SignupFragment extends Fragment implements View.OnClickListener {
+
+    private static final int REQUEST_CAMERA = 121;
 
     private EditText
             mFullName,
@@ -158,5 +162,15 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             case R.id.signup_signup:
                 break;
         }
+    }
+
+    private void cameraIntent()
+    {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, REQUEST_CAMERA);
+    }
+    private void galleryIntent()
+    {
+        
     }
 }
