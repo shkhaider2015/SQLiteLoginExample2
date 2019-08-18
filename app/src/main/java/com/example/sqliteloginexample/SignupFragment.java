@@ -35,6 +35,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "SignupFragment";
 
     private String userChoosenTask = "Nothing";
+    private boolean isImageSelected = false;
 
     private EditText
             mFullName,
@@ -47,7 +48,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.signup, container, false);
         init(view);
 
@@ -104,6 +106,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private void validateInfo()
     {
         String name, email, password, cPassword, cellNumber;
+        
 
         name = mFullName.getText().toString();
         email =mEmail.getText().toString().trim();
@@ -155,6 +158,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         {
             mCellNumber.requestFocus();
             return;
+        }
+        if(!isImageSelected)
+        {
+
         }
 
         loadToDatabase(name, email, password, cellNumber);
@@ -261,6 +268,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         }
 
         mProfilePicture.setImageBitmap(bm);
+        isImageSelected = true;
     }
     private void onCaptureImageResult(Intent data)
     {
@@ -275,6 +283,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
+            //byte[] bytesArray= bytes.toByteArray();
             fo.write(bytes.toByteArray());
             fo.close();
         }catch (IOException e)
@@ -289,5 +298,6 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
 
         mProfilePicture.setImageBitmap(thumbnail);
+        isImageSelected = true;
     }
 }
