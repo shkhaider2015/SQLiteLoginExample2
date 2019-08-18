@@ -1,10 +1,15 @@
 package com.example.sqliteloginexample;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +22,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class SignupFragment extends Fragment implements View.OnClickListener {
 
     private static final int REQUEST_CAMERA = 121;
+    private static final int SELECT_FILE = 131;
+    private static final String TAG = "SignupFragment";
+
+    private String userChoosenTask = "Nothing";
 
     private EditText
             mFullName,
@@ -164,6 +179,48 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    if(userChoosenTask.equals("Take Photo"))
+                    {
+                        cameraIntent();
+                    }
+                    else if(userChoosenTask.equals("Choose From Library"))
+                    {
+                        galleryIntent();
+                    }
+                }
+                else
+                {
+
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == Activity.RESULT_OK)
+        {
+            if(requestCode == SELECT_FILE)
+            {
+                onSelectFromGalleryResult(data);
+            }
+            else if(requestCode == REQUEST_CAMERA)
+            {
+                onCaptureImageResult(data);
+            }
+        }
+    }
+
     private void cameraIntent()
     {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -171,6 +228,65 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     }
     private void galleryIntent()
     {
-        
+        Intent galleryIntent = new Intent();
+        galleryIntent.setType("image/*");
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(galleryIntent, "Select File"), SELECT_FILE );
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data)
+    {
+        Bitmap bm = null;
+
+        if(data != null)
+        {
+            try
+            {
+                bm = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver() ,data.getData() );
+            }catch (FileNotFoundException e)
+            {
+                Log.d(TAG, "onSelectFromGalleryResult: Error -->> " + e.getMessage());
+                e.printStackTrace();
+
+            }catch (IOException e)
+            {
+                Log.d(TAG, "onSelectFromGalleryResult: Error -->> " + e.getMessage());
+                e.printStackTrace();
+            }catch (Exception e)
+            {
+                Log.d(TAG, "onSelectFromGalleryResult: Error --> " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        ivImage.setImageBitmap(bm);
+    }
+    private void onCaptureImageResult(Intent data)
+    {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+        FileOutputStream fo;
+
+        try
+        {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        }catch (IOException e)
+        {
+            Log.d(TAG, "onCaptureImageResult: IOException " + e.getMessage());
+            e.printStackTrace();
+        }catch (Exception e)
+        {
+            Log.d(TAG, "onCaptureImageResult: Exception " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        ivImage.setImageBitmap(thumbnail);
     }
 }
