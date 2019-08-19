@@ -35,7 +35,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "SignupFragment";
 
     private String userChoosenTask = "Nothing";
-    private boolean isImageSelected = false;
+    //private boolean isImageSelected = false;
 
     private EditText
             mFullName,
@@ -45,11 +45,11 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
             mCellNumber;
     private ImageButton mProfilePicture;
     private Button mSignup;
+    private byte[] profileImage = null;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.signup, container, false);
         init(view);
 
@@ -59,8 +59,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    private void init(View view)
-    {
+    private void init(View view) {
         mFullName = view.findViewById(R.id.signup_name);
         mEmail = view.findViewById(R.id.signup_email);
         mPassword = view.findViewById(R.id.signup_password);
@@ -70,32 +69,25 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         mSignup = view.findViewById(R.id.signup_signup);
     }
 
-    private void selectImage()
-    {
-        final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
+    private void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add Photo");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 boolean result = Utility.checkPermission(getActivity());
 
-                if(items[i].equals("Take Photo"))
-                {
+                if (items[i].equals("Take Photo")) {
                     userChoosenTask = "Take Photo";
-                    if(result)
+                    if (result)
                         cameraIntent();
-                }
-                else if(items[i].equals("Choose From Library"))
-                {
+                } else if (items[i].equals("Choose From Library")) {
                     userChoosenTask = "Choose From Library";
-                    if(result)
+                    if (result)
                         galleryIntent();
-                }
-                else if(items[i].equals("Cancel"))
-                {
+                } else if (items[i].equals("Cancel")) {
                     dialogInterface.dismiss();
                 }
             }
@@ -103,82 +95,72 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         builder.show();
     }
-    private void validateInfo()
-    {
+
+    private void validateInfo() {
         String name, email, password, cPassword, cellNumber;
-        
+        byte[] image;
+
 
         name = mFullName.getText().toString();
-        email =mEmail.getText().toString().trim();
-        password =mPassword.getText().toString().trim();
+        email = mEmail.getText().toString().trim();
+        password = mPassword.getText().toString().trim();
         cPassword = mConfirmPassword.getText().toString().trim();
         cellNumber = mCellNumber.getText().toString().trim();
 
-        if(name.isEmpty())
-        {
+        if (name.isEmpty()) {
             mFullName.requestFocus();
             return;
         }
-        if(email.isEmpty())
-        {
+        if (email.isEmpty()) {
             mEmail.requestFocus();
             return;
         }
-        if(password.isEmpty())
-        {
+        if (password.isEmpty()) {
             mPassword.requestFocus();
             return;
         }
-        if(cPassword.isEmpty())
-        {
+        if (cPassword.isEmpty()) {
             mConfirmPassword.requestFocus();
             return;
         }
-        if(cellNumber.isEmpty())
-        {
+        if (cellNumber.isEmpty()) {
             mCellNumber.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmail.requestFocus();
             return;
         }
-        if(password.length() < 6)
-        {
+        if (password.length() < 6) {
             mPassword.requestFocus();
             return;
         }
-        if(!password.equals(cPassword))
-        {
+        if (!password.equals(cPassword)) {
             mConfirmPassword.requestFocus();
             return;
         }
-        if(!Patterns.PHONE.matcher(cellNumber).matches())
-        {
+        if (!Patterns.PHONE.matcher(cellNumber).matches()) {
             mCellNumber.requestFocus();
             return;
         }
-        if(!isImageSelected)
+        if (profileImage == null )
         {
-
+            setDrawableResource();
         }
 
-        loadToDatabase(name, email, password, cellNumber);
+        loadToDatabase(name, email, password, cellNumber, profileImage);
 
 
     }
 
-    private void loadToDatabase(String name, String email, String password, String cellNumber)
+    private void loadToDatabase(String name, String email, String password, String cellNumber, byte[] profileImage)
     {
-        
+
     }
 
     @Override
-    public void onClick(View view)
-    {
-        switch (view.getId())
-        {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.signup_pic:
                 break;
             case R.id.signup_signup:
@@ -187,24 +169,16 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
-        switch (requestCode)
-        {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                {
-                    if(userChoosenTask.equals("Take Photo"))
-                    {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (userChoosenTask.equals("Take Photo")) {
                         cameraIntent();
-                    }
-                    else if(userChoosenTask.equals("Choose From Library"))
-                    {
+                    } else if (userChoosenTask.equals("Choose From Library")) {
                         galleryIntent();
                     }
-                }
-                else
-                {
+                } else {
 
                 }
                 break;
@@ -215,63 +189,53 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK)
-        {
-            if(requestCode == SELECT_FILE)
-            {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
                 onSelectFromGalleryResult(data);
-            }
-            else if(requestCode == REQUEST_CAMERA)
-            {
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
             }
         }
     }
 
-    private void cameraIntent()
-    {
+    private void cameraIntent() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, REQUEST_CAMERA);
     }
-    private void galleryIntent()
-    {
+
+    private void galleryIntent() {
         Intent galleryIntent = new Intent();
         galleryIntent.setType("image/*");
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(galleryIntent, "Select File"), SELECT_FILE );
+        startActivityForResult(Intent.createChooser(galleryIntent, "Select File"), SELECT_FILE);
     }
 
     @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data)
-    {
+    private void onSelectFromGalleryResult(Intent data) {
         Bitmap bm = null;
 
-        if(data != null)
-        {
-            try
-            {
-                bm = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver() ,data.getData() );
-            }catch (FileNotFoundException e)
-            {
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
+            } catch (FileNotFoundException e) {
                 Log.d(TAG, "onSelectFromGalleryResult: Error -->> " + e.getMessage());
                 e.printStackTrace();
 
-            }catch (IOException e)
-            {
+            } catch (IOException e) {
                 Log.d(TAG, "onSelectFromGalleryResult: Error -->> " + e.getMessage());
                 e.printStackTrace();
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 Log.d(TAG, "onSelectFromGalleryResult: Error --> " + e.getMessage());
                 e.printStackTrace();
             }
         }
 
         mProfilePicture.setImageBitmap(bm);
-        isImageSelected = true;
+        //isImageSelected = true;
+        setByteArray(bm);
     }
-    private void onCaptureImageResult(Intent data)
-    {
+
+    private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -279,25 +243,38 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
 
-        try
-        {
+        try {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             //byte[] bytesArray= bytes.toByteArray();
             fo.write(bytes.toByteArray());
             fo.close();
-        }catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.d(TAG, "onCaptureImageResult: IOException " + e.getMessage());
             e.printStackTrace();
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             Log.d(TAG, "onCaptureImageResult: Exception " + e.getMessage());
             e.printStackTrace();
         }
 
 
         mProfilePicture.setImageBitmap(thumbnail);
-        isImageSelected = true;
+        //isImageSelected = true;
+        setByteArray(thumbnail);
+
     }
+
+    private void setByteArray(Bitmap bitmap)
+    {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+        profileImage = byteArrayOutputStream.toByteArray();
+
+    }
+    private void setDrawableResource()
+    {
+
+    }
+
 }
