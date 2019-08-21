@@ -155,6 +155,17 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     private void loadToDatabase(String name, String email, String password, String cellNumber, byte[] profileImage)
     {
+        UserDataModel user = new UserDataModel();
+        SQLiteHelper db = new SQLiteHelper(getContext());
+
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setCellNumber(cellNumber);
+        user.setProfilePicture(profileImage);
+
+        db.addUsers(user);
+
 
     }
 
