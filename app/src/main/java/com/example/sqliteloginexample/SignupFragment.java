@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -49,7 +50,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.signup, container, false);
         init(view);
 
@@ -150,6 +152,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         loadToDatabase(name, email, password, cellNumber, profileImage);
 
+        nextPage();
 
     }
 
@@ -173,8 +176,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.signup_pic:
+                selectImage();
                 break;
             case R.id.signup_signup:
+                validateInfo();
                 break;
         }
     }
@@ -285,7 +290,13 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     }
     private void setDrawableResource()
     {
+        Bitmap tempData = BitmapFactory.decodeResource(getResources(), R.drawable.temp_user);
+        setByteArray(tempData);
+    }
 
+    private void nextPage()
+    {
+        
     }
 
 }
