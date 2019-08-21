@@ -296,7 +296,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     private void nextPage()
     {
-        
+
     }
 
 }
