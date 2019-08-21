@@ -22,6 +22,8 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,6 +36,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CAMERA = 0;
     private static final int SELECT_FILE = 1;
     private static final String TAG = "SignupFragment";
+    final FragmentManager fragmentManager = getFragmentManager();
 
     private String userChoosenTask = "Nothing";
     //private boolean isImageSelected = false;
@@ -296,6 +299,19 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     private void nextPage()
     {
+        Fragment SignUpFragment = FragmentUtility.getFragmentByTagName(fragmentManager, "SignupFragment");
+
+        if(SignUpFragment == null)
+        {
+            SignUpFragment = new SignupFragment();
+        }
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout_fragment, SignUpFragment, "SignupFragment");
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        FragmentUtility.printActivityFragmentList(fragmentManager);
 
     }
 
