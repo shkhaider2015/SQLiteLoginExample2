@@ -94,6 +94,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             // email not exist
             displayToast("Email is not exist");
             // goto signup page
+            // this change for commit
         }
 
     }
