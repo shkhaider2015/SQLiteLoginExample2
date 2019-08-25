@@ -299,15 +299,15 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
     private void nextPage()
     {
-        Fragment SignUpFragment = FragmentUtility.getFragmentByTagName(fragmentManager, "SignupFragment");
+        Fragment HomeFragment = FragmentUtility.getFragmentByTagName(fragmentManager, "HomeFragment");
 
-        if(SignUpFragment == null)
+        if(HomeFragment == null)
         {
-            SignUpFragment = new SignupFragment();
+            HomeFragment = new SignupFragment();
         }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout_fragment, SignUpFragment, "SignupFragment");
+        fragmentTransaction.replace(R.id.frame_layout_fragment, HomeFragment, "HomeFragment");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 

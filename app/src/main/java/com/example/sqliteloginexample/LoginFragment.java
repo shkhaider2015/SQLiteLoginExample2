@@ -108,14 +108,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
     private void nextPage()
     {
-        Fragment loginFragment = FragmentUtility.getFragmentByTagName(fragmentManager, "LoginFragment");
+        Fragment SignupFragment = FragmentUtility.getFragmentByTagName(fragmentManager, "SignupFragment");
 
-        if(loginFragment == null)
+        if(SignupFragment == null)
         {
-            loginFragment = new LoginFragment();
+            SignupFragment = new LoginFragment();
         }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout_fragment, loginFragment, "LoginFragment");
+        fragmentTransaction.replace(R.id.frame_layout_fragment, SignupFragment, "SignupFragment");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
