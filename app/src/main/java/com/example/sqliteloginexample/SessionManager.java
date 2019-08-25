@@ -10,6 +10,7 @@ public class SessionManager {
     private static final String NAME = "name";
     private static final String EMAIL = "email";
     private static final String FLAG = "flag";
+    private static final int PRIVATE_MODE = 0;
 
     private static String TAG = SessionManager.class.getSimpleName();
 
@@ -20,7 +21,7 @@ public class SessionManager {
     public SessionManager(Context context)
     {
         this.context = context;
-        preferences = this.context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        preferences = this.context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = preferences.edit();
 
     }
