@@ -172,6 +172,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         db.addUsers(user);
 
+        SessionManager sessionManager = new SessionManager(getContext());
+        sessionManager.setEmail(email);
 
     }
 
@@ -303,7 +305,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         if(HomeFragment == null)
         {
-            HomeFragment = new SignupFragment();
+            HomeFragment = new HomeFragment();
         }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
