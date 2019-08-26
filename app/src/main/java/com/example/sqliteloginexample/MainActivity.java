@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void progressTime()
     {
+        //count down timer
 
         CountDownTimer countDownTimer = new CountDownTimer(50000, 100)
         {
