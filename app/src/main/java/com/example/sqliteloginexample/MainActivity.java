@@ -72,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
+
                 }
+                operation();
+                nextPage(isLoggedIn);
 
 
             }
