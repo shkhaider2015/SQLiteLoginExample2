@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private TextView mTextView;
     private boolean isLoggedIn = false;
+    private int progressStatus = 0;
     final FragmentManager fragmentManager = getSupportFragmentManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,30 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void progressTime()
     {
-        //count down timer
-        //comment2
-        //comment3
-
-        CountDownTimer countDownTimer = new CountDownTimer(50000, 100)
-        {
-            int total = 0;
+        new Thread(new Runnable() {
             @Override
-            public void onTick(long var)
+            public void run()
             {
-                total += var;
-                mProgressBar.setProgress(total);
-                mTextView.setText(total);
-                Log.d(TAG, "onTick: -------------------------------------------->>>>");
-            }
 
-            @Override
-            public void onFinish()
-            {
-                operation();
-                nextPage(isLoggedIn);
-                Log.d(TAG, "onFinish: --------------------------------------------!!!!");
+
             }
-        }.start();
+        }).start();
+
     }
 
     private void nextPage(boolean isLoggedIn)
