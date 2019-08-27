@@ -7,10 +7,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     private ProgressBar mProgressBar;
     private TextView mTextView;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 total += var;
                 mProgressBar.setProgress(total);
                 mTextView.setText(total);
+                Log.d(TAG, "onTick: -------------------------------------------->>>>");
             }
 
             @Override
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 operation();
                 nextPage(isLoggedIn);
+                Log.d(TAG, "onFinish: --------------------------------------------!!!!");
             }
         }.start();
     }
