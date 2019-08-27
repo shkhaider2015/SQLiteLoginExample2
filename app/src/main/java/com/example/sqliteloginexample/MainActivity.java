@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextView;
     private boolean isLoggedIn = false;
     private int progressStatus = 0;
+    private Handler handler;
+
     final FragmentManager fragmentManager = getSupportFragmentManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,35 @@ public class MainActivity extends AppCompatActivity {
 
     private void progressTime()
     {
+        handler = new Handler();
+
         new Thread(new Runnable() {
             @Override
             public void run()
             {
+                while(progressStatus < 100)
+                {
+                    progressStatus += 1;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            mProgressBar.setProgress(progressStatus);
+                            mTextView.setText(progressStatus);
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(2000);
+
+                    }catch (InterruptedException e)
+                    {
+                        Log.d(TAG, "run: " + e.getLocalizedMessage());
+                        e.printStackTrace();
+                    }
+
+
+                }
 
 
             }
