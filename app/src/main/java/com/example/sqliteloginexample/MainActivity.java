@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         public void run()
                         {
                             mProgressBar.setProgress(progressStatus);
-                            mTextView.setText(progressStatus);
+                            mTextView.setText(String.valueOf(progressStatus));
                         }
                     });
 
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(100);
 
                     }catch (InterruptedException e)
                     {
