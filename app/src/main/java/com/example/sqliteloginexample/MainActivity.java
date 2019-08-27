@@ -8,10 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar mProgressBar;
+    private ProgressBar mProgressBar;
+    private TextView mTextView;
     private boolean isLoggedIn = false;
     final FragmentManager fragmentManager = getSupportFragmentManager();
     @Override
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
         mProgressBar = findViewById(R.id.main_progress);
+        mTextView = findViewById(R.id.main_text);
     }
 
     private void progressTime()
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 total += var;
                 mProgressBar.setProgress(total);
+                mTextView.setText(total);
             }
 
             @Override
