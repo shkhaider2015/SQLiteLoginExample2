@@ -51,7 +51,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.login_login:
                 //commit 1
                 //commit 2
-                //commit 3
                 break;
             case R.id.login_signup:
                 break;
