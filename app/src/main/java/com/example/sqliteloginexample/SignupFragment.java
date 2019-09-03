@@ -184,7 +184,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                 selectImage();
                 break;
             case R.id.signup_signup:
-                validateInfo();
+//                validateInfo();
+                nextPage();
                 break;
         }
     }

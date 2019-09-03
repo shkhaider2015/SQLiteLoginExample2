@@ -53,6 +53,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 //commit 2
                 break;
             case R.id.login_signup:
+                nextPage();
                 break;
         }
     }
