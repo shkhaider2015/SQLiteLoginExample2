@@ -116,7 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         if(SignupFragment == null)
         {
-            SignupFragment = new LoginFragment();
+            SignupFragment = new SignupFragment();
         }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout_fragment, SignupFragment, "SignupFragment");
